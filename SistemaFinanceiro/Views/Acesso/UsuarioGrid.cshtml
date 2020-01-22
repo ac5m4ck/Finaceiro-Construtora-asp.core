@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Usuario>
+
+@(Html
+        .Grid(Model)
+        .Build(columns =>
+        {
+            columns.Add(model => model.Id).Css("collapse");
+            columns.Add(model => model.Nome).Titled("NOME").Encoded(false).RenderedAs(model => "<a href='/Painel/UsuarioEditar/" + model.Id + "'>" + model.Nome + "</a>").InitialSort(GridSortOrder.Asc);
+            columns.Add(model => model.Email).Titled("E-MAIL");
+            //columns.Add(model => model.GrupoDePermissao.Descricao).Titled("Grupo de Permissão").Encoded(false).RenderedAs(model => model.GrupoDePermissao != null ? model.GrupoDePermissao.Descricao : "Vendedor");
+            //columns.Add(model => model.CadastroVendedor).Titled("Vendedor").Encoded(false).RenderedAs(model => model.CadastroVendedor ? "<span class='label label-success'>Sim</span>" : "<span class='label label-danger'>Não</span>");
+            //columns.Add(model => model.Ativo).Titled("Ativo").Encoded(false).RenderedAs(model => model.Ativo ? "<span class='label label-success'>Sim</span>" : "<span class='label label-danger'>Não</span>");
+        })
+        .Css("table table-hover")
+        .Filterable()
+        .Sortable()
+        .Pageable(pager =>
+        {
+            pager.PagesToDisplay = 5;
+            pager.RowsPerPage = 10;
+        })
+        .Empty("Nenhum resultado encontrado")
+)

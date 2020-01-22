@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Financeriros>
+
+@(Html
+        .Grid(Model)
+        .Build(columns =>
+        {
+            columns.Add(model => model.Id).Css("collapse");
+            columns.Add(model => model.Descricao).Titled("DESCRIÇAO").Encoded(false).RenderedAs(model => "<a href='/Painel/FinanceiroEditar/" + model.Id + "'>" + model.Descricao + "</a>").InitialSort(GridSortOrder.Asc);
+            columns.Add(model => model.TerceirosId).Titled("TERCEIROS");
+            columns.Add(Model => Model.DataCadastro).Titled("DATA CADASTRO");
+            columns.Add(Model => Model.Valor).Titled("Valor");
+
+           
+        })
+        .Css("table table-hover")
+        .Filterable()
+        .Sortable()
+        .Pageable(pager =>
+        {
+            pager.PagesToDisplay = 5;
+            pager.RowsPerPage = 10;
+        })
+        .Empty("Nenhum resultado encontrado")
+)

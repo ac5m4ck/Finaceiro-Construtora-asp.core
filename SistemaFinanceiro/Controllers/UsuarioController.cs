@@ -25,7 +25,7 @@ namespace SistemaFinanceiro.Controllers
             return View();
         }
 
-
+        //Modelo de grids
         public IActionResult IndexGrid(string search)
         {
 
@@ -51,7 +51,7 @@ namespace SistemaFinanceiro.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Usuario usuario)
-        {
+        {  
             try
             {
                 if (ModelState.IsValid)
@@ -64,16 +64,22 @@ namespace SistemaFinanceiro.Controllers
                         persertir.Email = usuario.Email;
                         persertir.Senha = usuario.Senha;
 
-
                         return RedirectToAction(nameof(Index));
-
-
                     }
                     else
                     {
-                        
-                        _Context.Usuario.Add(usuario);
-                        _Context.SaveChanges();
+                        var validacao = _Context.Usuario.FirstOrDefault(c => c.Email == usuario.Email);
+
+                        if (validacao != null)
+                        {
+                            ViewBag.Messagen = "Não foi possivel cadastrar Email, já é cadastrado na nossa base";                           
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            _Context.Usuario.Add(usuario);
+                            _Context.SaveChanges();
+                        }                     
 
                         return RedirectToAction("Index");
                     }
@@ -89,8 +95,6 @@ namespace SistemaFinanceiro.Controllers
                 return View(usuario);
             }
         }
-
-
       
         public ActionResult Delete(int id)
         {

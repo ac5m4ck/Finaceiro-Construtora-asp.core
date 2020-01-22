@@ -1,48 +1,47 @@
 ﻿@model SistemaFinanceiro.Models.Financeriros
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Financeiro Edit";
 }
 
-<h2>Edit</h2>
+<h2>Adicionar Financeiro</h2>
 
-<h4>Financeriros</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="FinanceiroEdit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @Html.HiddenFor(model => model.Id)
             <div class="form-group">
-                <label asp-for="TerceirosId" class="control-label"></label>
+                <label asp-for="TerceirosId" class="control-label">Adicionar Terceiros</label>
                 <select asp-for="TerceirosId" asp-items="(SelectList)ViewBag.Terceiros" class="form-control">
                     <option value=""></option>
                 </select>
                 <span asp-validation-for="TerceirosId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DataCadastro" class="control-label"></label>
-                <input asp-for="DataCadastro" class="form-control" />
-                <span asp-validation-for="DataCadastro" class="text-danger"></span>
+                <label asp-for="DataCadastro" class="control-label">Data Cadastro</label>
+                <input asp-for="DataCadastro.Value.Date" class="form-control" readonly data-val="false" />
+                <span asp-validation-for="DataCadastro.Value.Date" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DataReferencia" class="control-label"></label>
-                <input asp-for="DataReferencia" class="form-control" />
-                <span asp-validation-for="DataReferencia" class="text-danger"></span>
+                <label asp-for="DataReferencia" class="control-label">Data Referencia</label>
+                <input asp-for="DataReferencia.Value.Date" class="form-control" />
+                <span asp-validation-for="DataReferencia.Value.Date" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Descricao" class="control-label"></label>
+                <label asp-for="Descricao" class="control-label">Descrição</label>
                 <input asp-for="Descricao" class="form-control" />
                 <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Valor" class="control-label"></label>
+                <label asp-for="Valor" class="control-label">Valor</label>
                 <input asp-for="Valor" class="form-control" />
                 <span asp-validation-for="Valor" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-                <a class="btn btn-default" asp-action="Index">Voltar</a>
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+                <a class="btn btn-default" asp-action="Financeiro">Voltar</a>
             </div>
         </form>
     </div>
@@ -51,6 +50,4 @@
 <div>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

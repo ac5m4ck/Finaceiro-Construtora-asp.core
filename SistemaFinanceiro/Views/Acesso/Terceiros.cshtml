@@ -1,0 +1,19 @@
+﻿@model IEnumerable<SistemaFinanceiro.Models.Terceiros>
+
+@{
+    ViewData["Title"] = "Terceiros";
+}
+
+<h2></h2>
+
+<p>
+    <a asp-action="TerceirosEdit" class="btn btn-primary">Adicionar</a>
+</p>
+
+
+@Html.AjaxGrid(Url.Action("TerceirosGrid"))
+
+<script src="~/js/mvc-grid/mvc-grid.util.js"></script>
+
+
+    

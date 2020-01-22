@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Terceiros>
+
+@(Html
+        .Grid(Model)
+        .Build(columns =>
+        {
+            columns.Add(model => model.Id).Css("collapse");
+            columns.Add(model => model.Nome).Titled("NOME").Encoded(false).RenderedAs(model => "<a href='/Painel/TerceiroEditar/" + model.Id + "'>" + model.Nome + "</a>").InitialSort(GridSortOrder.Asc);
+            columns.Add(model => model.Endereco).Titled("ENDEREÇO");
+            columns.Add(Model => Model.Telefone).Titled("TELEFONE");
+           
+        })
+        .Css("table table-hover")
+        .Filterable()
+        .Sortable()
+        .Pageable(pager =>
+        {
+            pager.PagesToDisplay = 5;
+            pager.RowsPerPage = 10;
+        })
+        .Empty("Nenhum resultado encontrado")
+)

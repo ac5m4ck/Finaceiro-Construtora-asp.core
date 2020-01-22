@@ -1,0 +1,17 @@
+﻿@model IEnumerable<SistemaFinanceiro.Models.Financeriros>
+
+@{
+    ViewData["Title"] = "Financeiro";
+}
+
+<h2></h2>
+
+<p>
+    <a asp-action="FinanceiroEdit" class="btn btn-primary">Adicionar</a>
+</p>
+
+
+@Html.AjaxGrid(Url.Action("FinanceiroGrid"))
+
+
+<script src="~/js/mvc-grid/mvc-grid.util.js"></script>
